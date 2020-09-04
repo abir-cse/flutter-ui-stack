@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -8,8 +9,25 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final c3_marginTop = (3*screenWidth/4)-(screenWidth/8);
+    final c3_marginLeft = (screenWidth/2)-(screenWidth/8);
+    final c4_marginTop = (3*screenWidth/4)-(screenWidth/8)+10;
+    final c4_marginLeft = (screenWidth/2)-(screenWidth/8)+10;
+    final inText_Top = c3_marginTop+(screenWidth/8)-10;
+    final inText_Left = c3_marginLeft+(screenWidth/8)-10;
+    final info_MarginTop = c3_marginTop+(screenWidth/4)+5;
+    final info_marginLeft = (screenWidth/2)-10;
+    final scrollMarginTop = info_MarginTop+30;
+    print(screenHeight);
+    print(screenWidth);
+    print(screenWidth-100);
     return Scaffold(
       drawer: Drawer(),
       appBar: AppBar(
@@ -38,114 +56,127 @@ class MyApp extends StatelessWidget {
           BottomNavigationBarItem (icon: Icon(Icons.account_circle), title: Text('')),
         ],
       ),
-      body: Container(
-        color: Colors.white,
-        width: screenWidth,
-        //height: screenWidth,
-        child: Stack(
-          overflow: Overflow.visible,
-          alignment: Alignment.topCenter,
-          children: <Widget>[
-            Container (
-              width: screenWidth,
-              height: 150,
-              decoration: BoxDecoration(
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          width: screenWidth,
+          height: screenHeight,
+          child: Stack(
+            overflow: Overflow.visible,
+            //alignment: Alignment.,
+            children: <Widget>[
+              // rectangle
+              Container (
+                width: screenWidth,
+                height: (screenWidth-100)/2,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.rectangle
+                ),
+              ),
+              // circle
+
+              Container (
+                width: screenWidth-(screenWidth/4),
+                height: screenWidth-(screenWidth/4),
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                ),
+              ),
+              Container (
+                margin: EdgeInsets.only(left: screenWidth/4),
+                alignment: Alignment.topRight,
+                width: screenWidth-(screenWidth/4),
+                height: screenWidth-(screenWidth/4),
+                decoration: BoxDecoration(
                   color: Colors.black,
-                  shape: BoxShape.rectangle
-              ),
-            ),
-            Container (
-              height: 280,
-              margin: EdgeInsets.only(right: 100),
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle
-              ),
-            ),
-            Container (
-              height: 280,
-              margin: EdgeInsets.only(left: 100),
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle
-              ),
-            ),
-            Container (
-              height: 540,
-              margin: EdgeInsets.only(left: 130, right: 130),
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(232, 80, 91, 1.0),
-                  shape: BoxShape.circle
-              ),
-            ),
-            Container (
-              height: 540,
-              margin: EdgeInsets.only(left: 145, right: 145),
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle
-              ),
-            ),
-            Container(
-              //height: 800,
-              margin: EdgeInsets.only(top: 260),
-              child:                     Text(
-                'IN',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontFamily: 'Roboto',
-                  letterSpacing: 0.5,
-                  fontSize: 20,
+                  shape: BoxShape.circle,
                 ),
               ),
 
-            ),
-            Container(
-              //height: 800,
-              margin: EdgeInsets.only(top: 325),
-              child: Icon (
-                Icons.info_outline,
-                color: Color.fromRGBO(232, 80, 91, 1.0),
+              Container (
+                height: (screenWidth/4),
+                width: (screenWidth/4),
+
+                margin: EdgeInsets.only(top: c3_marginTop, left: c3_marginLeft),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(232, 80, 91, 1.0),
+                    shape: BoxShape.circle
+                ),
               ),
-            ),
-            Container(
-              height: 150,
-              padding: EdgeInsets.only(top: 50, left: 50.0, right: 20.0),
-              alignment: Alignment.topLeft,
-              child: Column (
-                  children: [
-                    Column (
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hello,',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontFamily: 'Roboto',
-                            letterSpacing: 0.5,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          'Peter Parker',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Roboto',
-                            letterSpacing: 0.5,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ]
+              Container (
+                height: (screenWidth/4)-20,
+                width: (screenWidth/4)-20,
+
+                margin: EdgeInsets.only(top: c4_marginTop, left: c4_marginLeft,),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle
+                ),
               ),
-            ),
-            // present - absent
-            Container(
-              height: 300,
+              Container(
+                margin: EdgeInsets.only(top: inText_Top, left: inText_Left),
+                child: Text(
+                  'IN',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontFamily: 'Roboto',
+                    letterSpacing: 0.5,
+                    fontSize: 20,
+                  ),
+                ),
+
+              ),
+
+              Container(
+                margin: EdgeInsets.only(top: info_MarginTop, left: info_marginLeft),
+                child: Icon (
+                  Icons.info_outline,
+                  color: Color.fromRGBO(232, 80, 91, 1.0),
+                ),
+              ),
+
+
+              Container(
+                height: 150,
+                padding: EdgeInsets.only(top: 30, left: 50.0, right: 20.0),
+                alignment: Alignment.topLeft,
+                child: Column (
+                    children: [
+                      Column (
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Hello,',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: 'Roboto',
+                              letterSpacing: 0.5,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            'Peter Parker',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Roboto',
+                              letterSpacing: 0.5,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]
+                ),
+              ),
+              // present - absent
+              Container(
+                height: 300,
                 padding: EdgeInsets.only(left: 10.0, right: 10.0),
                 child:  Row (
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -259,39 +290,76 @@ class MyApp extends StatelessWidget {
                     ),
                   ],
                 ),
-            ),
+              ),
 
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10, top: scrollMarginTop),
+                height: 30.0,
+                child: Row (
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Notifications',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Roboto',
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Events',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Roboto',
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Meetings',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Roboto',
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'View all',
+                        style: TextStyle(
+                          color: Color.fromRGBO(232, 80, 91, 100),
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Roboto',
+                          letterSpacing: 0.5,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ]
+                ),
+              ),
 
-            Padding (
-                padding: EdgeInsets.only(top: 350),
+              Container(margin: EdgeInsets.only(top: scrollMarginTop+40,),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
                 child: Container(
-                  height: MediaQuery.of(context).size.height - 185.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    //borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
-                  ),
-                  child: ListView(
-                    primary: false,
-                    padding: EdgeInsets.only(left: 5.0, right: 0.0),
-                    children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(top: 10.0),
-                          child: Container(
-                              height: MediaQuery.of(context).size.height - 300.0,
-                              child: ListView(children: [
-                                _buildCardItem('Loram ipsum dollar', 'Loram ipsum dollar'),
-                                _buildCardItem( 'Loram ipsum dollar', 'Loram ipsum dollar'),
-                                _buildCardItem('Loram ipsum dollar', 'Loram ipsum dollar'),
-                              ]))),
-                    ],
-                  ),
-                )
-            )
-
-          ],
+                    child: ListView(
+                        scrollDirection: Axis.vertical,
+                        children: [
+                      _buildCardItem('Loram ipsum dollar', 'Loram ipsum dollar'),
+                      _buildCardItem( 'Loram ipsum dollar', 'Loram ipsum dollar'),
+                      _buildCardItem('Loram ipsum dollar', 'Loram ipsum dollar'),
+                    ])),
+              )
+            ],
+          ),
         ),
       ),
-
     );
   }
   // card
