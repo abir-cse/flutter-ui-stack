@@ -2,4 +2,6 @@
 
 A new Flutter UI using Stack widget
 
-![Alt text] (https://github.com/abir-cse/flutter-ui-stack/blob/master/screenshot/s2.jpg)
+
+![alt s2](https://github.com/abir-cse/flutter-ui-stack/blob/master/screenshot/s2.jpg)
+![alt s3](https://github.com/abir-cse/flutter-ui-stack/blob/master/screenshot/s3.jpg)
